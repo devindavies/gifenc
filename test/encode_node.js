@@ -1,8 +1,8 @@
-import * as path from "path";
-import { promisify } from "util";
-import { writeFile } from "fs/promises";
+import * as path from "node:path";
+import { promisify } from "node:util";
+import { writeFile } from "node:fs/promises";
 import getPixelsCb from "get-pixels";
-import { GIFEncoder, quantize, applyPalette } from "../src/index.js";
+import { GIFEncoder, quantize, applyPalette } from "../dist/index.js";
 
 const getPixels = promisify(getPixelsCb);
 const __dirname = import.meta.dirname;
@@ -45,7 +45,8 @@ async function encode() {
 
 async function readImage(file) {
   const { data, shape } = await getPixels(file);
-  let width, height;
+  let width;
+  let height;
   if (shape.length === 3) {
     // PNG,JPG,etc...
     width = shape[0];
@@ -55,7 +56,7 @@ async function readImage(file) {
     width = shape[1];
     height = shape[2];
   } else {
-    throw new Error("Invalid shape " + shape.join(", "));
+    throw new Error(`Invalid shape ${shape.join(", ")}`);
   }
   return { data, width, height };
 }

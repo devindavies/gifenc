@@ -1,7 +1,7 @@
 import * as path from "path";
 import { promisify } from "util";
 import getPixelsCb from "get-pixels";
-import { GIFEncoder, quantize, applyPalette } from "../src/index.js";
+import { GIFEncoder, quantize, applyPalette } from "../dist/index.js";
 
 const getPixels = promisify(getPixelsCb);
 const __dirname = import.meta.dirname;

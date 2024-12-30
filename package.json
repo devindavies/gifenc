@@ -1,44 +1,54 @@
 {
-  "name": "gifenc",
-  "version": "1.0.3",
-  "description": "very fast JS GIF encoder",
-  "type": "module",
-  "main": "./src/index.js",
-  "types": "./types.d.ts",
-  "license": "MIT",
-  "author": {
-    "name": "Matt DesLauriers",
-    "email": "dave.des@gmail.com",
-    "url": "https://github.com/mattdesl"
-  },
-  "devDependencies": {
-    "esbuild": "^0.8.52",
-    "get-pixels": "^3.3.2",
-    "serve": "^11.3.2"
-  },
-  "scripts": {
-    "prepublishOnly": "npm run dist:cjs",
-    "serve": "serve .",
-    "dist:cjs": "esbuild ./src/index.js --bundle --format=cjs --outfile=dist/gifenc.js --sourcemap --target=chrome58,firefox57,safari11,edge16,node12"
-  },
-  "ava": {
-    "require": [
-      "esm"
-    ],
-    "ignoredByWatcher": [
-      "test/output"
-    ]
-  },
-  "keywords": [
-    "gif",
-    "encoder"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mattdesl/gifenc.git"
-  },
-  "homepage": "https://github.com/mattdesl/gifenc",
-  "bugs": {
-    "url": "https://github.com/mattdesl/gifenc/issues"
-  }
+	"name": "gifenc",
+	"version": "1.0.3",
+	"description": "very fast JS GIF encoder",
+	"main": "./dist/index.js",
+	"files": ["dist"],
+	"type": "module",
+	"exports": {
+		".": {
+			"import": {
+				"default": "./dist/index.js",
+				"types": "./dist/index.d.ts"
+			},
+			"require": {
+				"default": "./index/index.cjs",
+				"types": "./index/index.d.cts"
+			}
+		}
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Matt DesLauriers",
+		"email": "dave.des@gmail.com",
+		"url": "https://github.com/mattdesl"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"@types/node": "^22.10.2",
+		"esbuild": "^0.8.52",
+		"get-pixels": "^3.3.2",
+		"serve": "^11.3.2",
+		"tsup": "^8.3.5",
+		"typescript": "^5.7.2"
+	},
+	"scripts": {
+		"prepublishOnly": "npm run dist:cjs",
+		"serve": "serve .",
+		"build": "tsup",
+		"dist:cjs": "esbuild ./src/index.js --bundle --format=cjs --outfile=dist/gifenc.js --sourcemap --target=chrome58,firefox57,safari11,edge16,node12"
+	},
+	"ava": {
+		"require": ["esm"],
+		"ignoredByWatcher": ["test/output"]
+	},
+	"keywords": ["gif", "encoder"],
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/mattdesl/gifenc.git"
+	},
+	"homepage": "https://github.com/mattdesl/gifenc",
+	"bugs": {
+		"url": "https://github.com/mattdesl/gifenc/issues"
+	}
 }

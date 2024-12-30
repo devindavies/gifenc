@@ -1,5 +1,5 @@
 // Note: Uses source version, not built version!
-import { GIFEncoder, applyPalette, quantize } from "../src/index.js";
+import { GIFEncoder, applyPalette, quantize } from "../dist/index.js";
 
 const N = 100;
 
