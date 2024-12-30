@@ -33,14 +33,9 @@
 		"typescript": "^5.7.2"
 	},
 	"scripts": {
-		"prepublishOnly": "npm run dist:cjs",
+		"prepare": "npm run build",
 		"serve": "serve .",
-		"build": "tsup",
-		"dist:cjs": "esbuild ./src/index.js --bundle --format=cjs --outfile=dist/gifenc.js --sourcemap --target=chrome58,firefox57,safari11,edge16,node12"
-	},
-	"ava": {
-		"require": ["esm"],
-		"ignoredByWatcher": ["test/output"]
+		"build": "tsup"
 	},
 	"keywords": ["gif", "encoder"],
 	"repository": {
