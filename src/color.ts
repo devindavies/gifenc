@@ -1,6 +1,7 @@
 export type RGB = [number, number, number];
 export type RGBA = [number, number, number, number];
 export type Color = RGB | RGBA;
+export type Palette = Color[];
 
 export function isRGBA(color: Color): color is RGBA {
 	return color.length === 4;

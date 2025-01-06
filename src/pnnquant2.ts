@@ -6,6 +6,7 @@ Copyright (C) 2004-2019 Mark Tyler and Dmitry Groshev
 Copyright (c) 2018-2021 Miller Cy Chan
 * error measure; time used is proportional to number of bins squared - WJ */
 
+import type { Color, Palette, RGB, RGBA } from "./color.js";
 import {
 	rgb888_to_rgb565,
 	rgb888_to_rgb444,
@@ -301,7 +302,7 @@ export default function quantize(
 	}
 
 	// let palette = new Uint32Array(maxColors);
-	const palette = [];
+	const palette: Palette = [];
 
 	/* Fill palette */
 	let k = 0;
@@ -323,7 +324,7 @@ export default function quantize(
 			}
 		}
 
-		const color = hasAlpha ? [r, g, b, a] : [r, g, b];
+		const color = hasAlpha ? ([r, g, b, a] as RGBA) : ([r, g, b] as RGB);
 		const exists = existsInPalette(palette, color);
 		if (!exists) palette.push(color);
 		// biome-ignore lint/suspicious/noAssignInExpressions: <explanation>
@@ -333,7 +334,7 @@ export default function quantize(
 	return palette;
 }
 
-function existsInPalette(palette: number[][], color: number[]) {
+function existsInPalette(palette: Palette, color: Color) {
 	for (let i = 0; i < palette.length; i++) {
 		const p = palette[i];
 		const matchesRGB =

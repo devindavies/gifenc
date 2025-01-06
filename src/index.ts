@@ -11,6 +11,7 @@ import {
 	nearestColorIndexWithDistance,
 	snapColorsToPalette,
 } from "./palettize.js";
+import type { Palette } from "./color.js";
 
 export type GIFEncoderOptions = {
 	initialCapacity?: number;
@@ -18,7 +19,7 @@ export type GIFEncoderOptions = {
 };
 
 type WriteFrameOpts = {
-	palette?: number[][];
+	palette?: Palette;
 	first?: boolean;
 	transparent?: boolean;
 	transparentIndex?: number;
@@ -197,7 +198,7 @@ function encodeLogicalScreenDescriptor(
 	stream: ReturnType<typeof createStream>,
 	width: number,
 	height: number,
-	palette: number[][],
+	palette: Palette,
 	colorDepth = 8,
 ) {
 	const globalColorTableFlag = 1;
@@ -231,7 +232,7 @@ function encodeNetscapeExt(
 
 function encodeColorTable(
 	stream: ReturnType<typeof createStream>,
-	palette: number[][],
+	palette: Palette,
 ) {
 	const colorTableLength = 1 << colorTableSize(palette.length);
 	for (let i = 0; i < colorTableLength; i++) {
@@ -249,7 +250,7 @@ function encodeImageDescriptor(
 	stream: ReturnType<typeof createStream>,
 	width: number,
 	height: number,
-	localPalette: number[][] | null,
+	localPalette: Palette | null,
 ) {
 	stream.writeByte(0x2c); // image separator
 
