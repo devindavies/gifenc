@@ -7,6 +7,7 @@ import {
 import {
 	type Color,
 	euclideanDistanceSquared,
+	type Palette,
 	type RGB,
 	type RGBA,
 } from "./color.js";
@@ -42,7 +43,7 @@ export function prequantize(
 
 export function applyPalette(
 	rgba: Uint8Array | Uint8ClampedArray,
-	palette: RGB[] | RGBA[],
+	palette: Palette,
 	format = "rgb565",
 ) {
 	if (!rgba || !rgba.buffer) {
